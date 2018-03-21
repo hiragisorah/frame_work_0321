@@ -11,7 +11,7 @@ namespace System
 	class Camera : public ISystem
 	{
 	public:
-		D3DXVECTOR3 eye_ = { 0.f, 0.f, 1.f };
+		D3DXVECTOR3 eye_ = { 0.f, 0.f, -2.f };
 		D3DXVECTOR3 at_ = { 0.f, 0.f, 0.f };
 		D3DXVECTOR3 up_ = { 0.f, 1.f, 0.f };
 

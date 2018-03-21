@@ -18,7 +18,7 @@ namespace System
 		class Shader : public ISystem
 		{
 		private:
-			std::unordered_map<std::string, Data::Shader*> database_ = {};
+			std::unordered_map<std::string, Data::IShader*> database_ = {};
 
 		public:
 			template<class _Shader>

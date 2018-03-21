@@ -18,7 +18,7 @@
 
 namespace Data
 {
-	class Shader
+	class IShader
 	{
 	private:
 		ID3D11VertexShader * vs_ = nullptr;
@@ -30,8 +30,10 @@ namespace Data
 		ID3D11ShaderResourceView * resources_[10] = {};
 
 	public:
-		Shader(std::string hlsl, D3D11_INPUT_ELEMENT_DESC * desc, int desc_num)
+		void Create(std::string hlsl, D3D11_INPUT_ELEMENT_DESC * desc, int desc_num)
 		{
+			hlsl = "resource/shader/" + hlsl + ".hlsl";
+
 			auto d3d = Game::GetSystem<System::Direct3D11>();
 
 			ID3DBlob * compiled_shader = nullptr;
@@ -81,7 +83,7 @@ namespace Data
 		}
 
 	public:
-		virtual ~Shader(void)
+		virtual ~IShader(void)
 		{
 			if(this->vs_ != nullptr)
 				this->vs_->Release();
@@ -92,7 +94,8 @@ namespace Data
 			if (this->ps_ != nullptr)
 				this->ps_->Release();
 
-			this->layout_->Release();
+			if(this->layout_ != nullptr)
+				this->layout_->Release();
 
 			for (auto cb : this->cbuffers_)
 				if (cb != nullptr)
@@ -103,6 +106,8 @@ namespace Data
 		template<class _CBUFFER>
 		void CreateConstantBuffer(int num)
 		{
+			auto d3d = Game::GetSystem<System::Direct3D11>();
+
 			{// コンスタントバッファー作成
 				D3D11_BUFFER_DESC cb;
 				cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -122,7 +127,7 @@ namespace Data
 			this->samplers_[num] = sampler;
 		}
 
-		void SetTeture(int num, std::string file_name)
+		void SetTexture(int num, std::string file_name)
 		{
 			this->resources_[num] = Game::GetSystem<System::Loader::Texture>()->Get(file_name)->resource_;
 		}
@@ -134,7 +139,7 @@ namespace Data
 			auto d3d = Game::GetSystem<System::Direct3D11>();
 			
 			D3D11_MAPPED_SUBRESOURCE data;
-			if (SUCCEEDED(d3d->context_->Map(this->cbuffer_[num], 0, D3D11_MAP_WRITE_DISCARD, 0, &data)))
+			if (SUCCEEDED(d3d->context_->Map(this->cbuffers_[num], 0, D3D11_MAP_WRITE_DISCARD, 0, &data)))
 			{
 				memcpy_s(data.pData, data.RowPitch, cb, sizeof(_CBUFFER));
 				d3d->context_->Unmap(this->cbuffers_[num], 0);
@@ -156,6 +161,8 @@ namespace Data
 
 			d3d->context_->PSSetSamplers(0, 10, this->samplers_);
 			d3d->context_->PSSetShaderResources(0, 10, this->resources_);
+
+			d3d->context_->IASetInputLayout(this->layout_);
 		}
 	};
 }

@@ -9,7 +9,8 @@
 #include <utils\memory.h>
 #include <framework\entity.h>
 
-// コンポーネント
+// データ
+#include <data\model.h>
 
 // API
 #include <D3DX11.h>
@@ -17,6 +18,7 @@
 
 // 標準ライブラリ
 #include <algorithm>
+#include <vector>
 
 // ライブラリファイル読込
 #pragma comment(lib,"winmm.lib")
@@ -31,13 +33,14 @@ namespace System
 	class Direct3D11 : public ISystem
 	{
 	public:
-		ID3D11Device * device_;
-		ID3D11DeviceContext * context_;
-		IDXGISwapChain * swap_chain_;
-		ID3D11Texture2D * back_buffer_ds_tex_;
-		ID3D11RenderTargetView * back_buffer_rtv_;
-		ID3D11DepthStencilView * back_buffer_dsv_;
+		ID3D11Device * device_ = nullptr;
+		ID3D11DeviceContext * context_ = nullptr;
+		IDXGISwapChain * swap_chain_ = nullptr;
+		ID3D11Texture2D * back_buffer_ds_tex_ = nullptr;
+		ID3D11RenderTargetView * back_buffer_rtv_ = nullptr;
+		ID3D11DepthStencilView * back_buffer_dsv_ = nullptr;
 		D3DXCOLOR bg_color_ = { 0.5f, 0.4f, 1.f, 1.f };
+		std::vector<Data::IModel*> draw_list_ = {};
 
 	public:
 		Direct3D11(void)
@@ -139,12 +142,20 @@ namespace System
 			}
 
 			{// 描画
+				for (auto obj : this->draw_list_)
+					obj->Rendering();
 
+				this->draw_list_.clear();
 			}
 
 			{// 画面更新
 				this->swap_chain_->Present(1, 0);
 			}
+		}
+
+		void AddToDrawList(Data::IModel * model)
+		{
+			this->draw_list_.emplace_back(model);
 		}
 	};
 }

@@ -114,13 +114,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="data\model.h" />
+    <ClInclude Include="data\model\point3d.h" />
     <ClInclude Include="data\shader.h" />
-    <ClInclude Include="data\shader\dafault3d.h" />
+    <ClInclude Include="data\shader\point3d.h" />
     <ClInclude Include="data\texture.h" />
     <ClInclude Include="framework\component.h" />
     <ClInclude Include="framework\entity.h" />
     <ClInclude Include="framework\game.h" />
     <ClInclude Include="framework\system.h" />
+    <ClInclude Include="game_object\point3d.h" />
     <ClInclude Include="scene\title.h" />
     <ClInclude Include="system\camera.h" />
     <ClInclude Include="system\collision_manager.h" />
