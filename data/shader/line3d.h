@@ -43,8 +43,8 @@ namespace Data
 				//バーテックスバッファー作成
 				Vertex vertices[] =
 				{
-					D3DXVECTOR3(+.5f, +.5f, +.0f),
-					D3DXVECTOR3(-.5f, -.5f, +.0f)
+					D3DXVECTOR3(+.5f, 0.f, +.0f),
+					D3DXVECTOR3(-.5f, 0.f, +.0f)
 				};
 
 				D3D11_BUFFER_DESC bd;

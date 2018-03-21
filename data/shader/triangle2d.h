@@ -7,7 +7,7 @@ namespace Data
 {
 	namespace Shader
 	{
-		class Line2d : public IShader
+		class Triangle2d : public IShader
 		{
 		public:
 			struct Vertex
@@ -27,7 +27,7 @@ namespace Data
 			ID3D11Buffer * vertex_buffer_;
 
 		public:
-			Line2d(void)
+			Triangle2d(void)
 			{
 				auto d2d = Game::GetSystem<System::Direct3D11>();
 
@@ -42,8 +42,9 @@ namespace Data
 				//バーテックスバッファー作成
 				Vertex vertices[] =
 				{
-					D3DXVECTOR3(+100.0f, 0.0f, .0f),
-					D3DXVECTOR3(-100.0f, 0.0f, .0f),
+					D3DXVECTOR3(-100.f, -100.f, +.0f),
+					D3DXVECTOR3(+.0f, +100.f, +.0f),
+					D3DXVECTOR3(+100.f, -100.f, +.0f),
 				};
 
 				D3D11_BUFFER_DESC bd;

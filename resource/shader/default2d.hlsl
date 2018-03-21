@@ -19,8 +19,8 @@ PS_INPUT VS( float4 position : POSITION )
 
     output.position_ = mul(position, w);
 
-    output.position_.x = (output.position_.x / g_viewport) * 2;
-    output.position_.y = (output.position_.y / g_viewport) * 2;
+    output.position_.x = (output.position_.x / g_viewport.x) * 2;
+    output.position_.y = (output.position_.y / g_viewport.y) * 2;
 
 	return output;
 }

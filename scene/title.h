@@ -11,6 +11,10 @@
 #include <game_object\point2d.h>
 #include <game_object\line2d.h>
 #include <game_object\line3d.h>
+#include <game_object\triangle2d.h>
+#include <game_object\triangle3d.h>
+#include <game_object\square2d.h>
+#include <game_object\square3d.h>
 
 namespace Scene
 {
@@ -19,7 +23,7 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::Line2d>();
+			this->AddChild<GameObject::Triangle2d>();
 		}
 	};
 }
