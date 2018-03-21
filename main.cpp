@@ -14,7 +14,9 @@
 #include <system\loader\shader.h>
 
 // シェーダ
+#include <data\shader\point2d.h>
 #include <data\shader\point3d.h>
+#include <data\shader\line3d.h>
 
 // 標準ライブラリ
 #include <crtdbg.h>
@@ -40,6 +42,9 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 
 	{// ロード
 		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Point3d>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Point2d>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Line2d>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Line3d>();
 	}
 
 	{// 初期設定

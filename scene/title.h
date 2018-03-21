@@ -8,6 +8,9 @@
 
 // ゲームオブジェクト
 #include <game_object\point3d.h>
+#include <game_object\point2d.h>
+#include <game_object\line2d.h>
+#include <game_object\line3d.h>
 
 namespace Scene
 {
@@ -16,7 +19,7 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::Point3d>();
+			this->AddChild<GameObject::Line2d>();
 		}
 	};
 }

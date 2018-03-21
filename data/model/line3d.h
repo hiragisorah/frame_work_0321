@@ -7,7 +7,7 @@
 #include <data\model.h>
 
 // シェーダ
-#include <data\shader\point3d.h>
+#include <data\shader\line3d.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -16,16 +16,16 @@ namespace Data
 {
 	namespace Model
 	{
-		class Point3d : public IModel
+		class Line3d : public IModel
 		{
 		public:
-			Shader::Point3d * shader_;
-			Shader::Point3d::CBUFFER cb_;
+			Shader::Line3d * shader_;
+			Shader::Line3d::CBUFFER cb_;
 
 		public:
-			Point3d(void)
+			Line3d(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Point3d>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Line3d>();
 			}
 
 		private:
@@ -43,14 +43,14 @@ namespace Data
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
 
 				//バーテックスバッファーをセット
-				UINT stride = sizeof(Shader::Point3d::Vertex);
+				UINT stride = sizeof(Shader::Line3d::Vertex);
 				UINT offset = 0;
-				
+
 				d3d->context_->IASetVertexBuffers(0, 1, &this->shader_->vertex_buffer_, &stride, &offset);
 				//プリミティブ・トポロジーをセット
-				d3d->context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+				d3d->context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 				//プリミティブをレンダリング
-				d3d->context_->Draw(1, 0);
+				d3d->context_->Draw(2, 0);
 			}
 		};
 	}

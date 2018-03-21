@@ -1,5 +1,8 @@
 #pragma once
 
+// Œx–³Œø‰»
+#pragma warning(disable: 4324)
+
 // ƒVƒXƒeƒ€
 #include <system\direct3d11.h>
 

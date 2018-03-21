@@ -74,10 +74,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,14 +116,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="data\model.h" />
+    <ClInclude Include="data\model\line2d.h" />
+    <ClInclude Include="data\model\line3d.h" />
+    <ClInclude Include="data\model\point2d.h" />
     <ClInclude Include="data\model\point3d.h" />
     <ClInclude Include="data\shader.h" />
+    <ClInclude Include="data\shader\line2d.h" />
+    <ClInclude Include="data\shader\line3d.h" />
+    <ClInclude Include="data\shader\point2d.h" />
     <ClInclude Include="data\shader\point3d.h" />
     <ClInclude Include="data\texture.h" />
     <ClInclude Include="framework\component.h" />
     <ClInclude Include="framework\entity.h" />
     <ClInclude Include="framework\game.h" />
     <ClInclude Include="framework\system.h" />
+    <ClInclude Include="game_object\line2d.h" />
+    <ClInclude Include="game_object\line3d.h" />
+    <ClInclude Include="game_object\point2d.h" />
     <ClInclude Include="game_object\point3d.h" />
     <ClInclude Include="scene\title.h" />
     <ClInclude Include="system\camera.h" />

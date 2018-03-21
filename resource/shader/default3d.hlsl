@@ -1,4 +1,3 @@
-//ƒOƒ[ƒoƒ‹
 cbuffer global
 {
     matrix g_w;
