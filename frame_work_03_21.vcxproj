@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="data\shader.h" />
+    <ClInclude Include="data\shader\dafault3d.h" />
     <ClInclude Include="data\texture.h" />
     <ClInclude Include="framework\component.h" />
     <ClInclude Include="framework\entity.h" />
