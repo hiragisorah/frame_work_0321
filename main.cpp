@@ -33,17 +33,20 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 		Game::AddSystem<System::SceneManager>();
 		Game::AddSystem<System::Camera>();
 		Game::AddSystem<System::Loader::Shader>();
+		Game::AddSystem<System::Loader::Mesh>();
 	}
 
 	{// ÉçÅ[Éh
 		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default2d>();
 		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default3d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default2d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default3d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default2d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default3d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default2d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default3d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Point2d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Point3d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Line2d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Line3d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Triangle2d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Triangle3d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square2d>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3d>();
 	}
 
 	{// èâä˙ê›íË

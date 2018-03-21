@@ -23,7 +23,7 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::Square3d>();
+			this->AddChild<GameObject::Point3d>();
 		}
 	};
 }

@@ -115,6 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="data\mesh\line2d.h" />
+    <ClInclude Include="data\mesh\line3d.h" />
+    <ClInclude Include="data\mesh\point2d.h" />
+    <ClInclude Include="data\mesh\point3d.h" />
+    <ClInclude Include="data\mesh\square2d.h" />
+    <ClInclude Include="data\mesh\square3d.h" />
+    <ClInclude Include="data\mesh\triangle2d.h" />
+    <ClInclude Include="data\mesh\triangle3d.h" />
     <ClInclude Include="data\model.h" />
     <ClInclude Include="data\model\line2d.h" />
     <ClInclude Include="data\model\line3d.h" />
@@ -128,6 +136,7 @@
     <ClInclude Include="data\shader\default2d.h" />
     <ClInclude Include="data\shader\default3d.h" />
     <ClInclude Include="data\texture.h" />
+    <ClInclude Include="data\mesh.h" />
     <ClInclude Include="framework\component.h" />
     <ClInclude Include="framework\entity.h" />
     <ClInclude Include="framework\game.h" />
@@ -145,7 +154,7 @@
     <ClInclude Include="system\collision_manager.h" />
     <ClInclude Include="system\direct3d11.h" />
     <ClInclude Include="system\input\wm.h" />
-    <ClInclude Include="system\loader\model.h" />
+    <ClInclude Include="system\loader\mesh.h" />
     <ClInclude Include="system\loader\shader.h" />
     <ClInclude Include="system\loader\texture.h" />
     <ClInclude Include="system\scene_manager.h" />

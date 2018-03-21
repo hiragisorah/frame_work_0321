@@ -16,13 +16,5 @@ namespace Data
 
 	private:
 		virtual void Rendering(void) = 0;
-
-	protected:
-		ID3D11Buffer * vertex_buffer_ = nullptr;
-		unsigned int vtx_num_ = 0;
-		unsigned int stride_ = 0;
-		unsigned int offset_ = 0;
-		ID3D11Buffer * index_buffer_ = nullptr;
-		unsigned int index_num_ = 0;
 	};
 }

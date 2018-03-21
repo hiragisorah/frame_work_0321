@@ -6,11 +6,15 @@
 // データ
 #include <data\model.h>
 
+// メッシュ
+#include <data\mesh\line2d.h>
+
 // シェーダ
 #include <data\shader\default2d.h>
 
 // ローダー
 #include <system\loader\shader.h>
+#include <system\loader\mesh.h>
 
 namespace Data
 {
@@ -19,6 +23,7 @@ namespace Data
 		class Line2d : public IModel
 		{
 		public:
+			Mesh::Line2d * mesh_;
 			Shader::Default2d * shader_;
 			Shader::Default2d::CBUFFER cb_;
 
@@ -26,13 +31,7 @@ namespace Data
 			Line2d(void)
 			{
 				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default2d>();
-
-				std::vector<Shader::Default2d::Vertex> vertices;
-
-				vertices.emplace_back(D3DXVECTOR3(+100.0f, 0.0f, .0f));
-				vertices.emplace_back(D3DXVECTOR3(-100.0f, 0.0f, .0f));
-
-				Game::GetSystem<System::Direct3D11>()->CreateVertexBuffer(this, &vertices);
+				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<Mesh::Line2d>();
 			}
 
 		private:
@@ -48,11 +47,11 @@ namespace Data
 				this->shader_->Setup();
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
 
-				d3d->context_->IASetVertexBuffers(0, 1, &this->vertex_buffer_, &this->stride_, &this->offset_);
+				d3d->context_->IASetVertexBuffers(0, 1, &this->mesh_->vertex_buffer_, &this->mesh_->stride_, &this->mesh_->offset_);
 				//プリミティブ・トポロジーをセット
 				d3d->context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 				//プリミティブをレンダリング
-				d3d->context_->Draw(this->vtx_num_, 0);
+				d3d->context_->Draw(this->mesh_->vtx_num_, 0);
 			}
 		};
 	}
