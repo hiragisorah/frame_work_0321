@@ -68,12 +68,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(DXSDK_DIR)Include;$(ProjectDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,6 +114,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="data\shader.h" />
+    <ClInclude Include="data\texture.h" />
+    <ClInclude Include="framework\component.h" />
+    <ClInclude Include="framework\entity.h" />
+    <ClInclude Include="framework\game.h" />
+    <ClInclude Include="framework\system.h" />
+    <ClInclude Include="scene\title.h" />
+    <ClInclude Include="system\camera.h" />
+    <ClInclude Include="system\collision_manager.h" />
+    <ClInclude Include="system\direct3d11.h" />
+    <ClInclude Include="system\input\wm.h" />
+    <ClInclude Include="system\loader\model.h" />
+    <ClInclude Include="system\loader\shader.h" />
+    <ClInclude Include="system\loader\texture.h" />
+    <ClInclude Include="system\scene_manager.h" />
+    <ClInclude Include="system\window.h" />
+    <ClInclude Include="utils\memory.h" />
+    <ClInclude Include="utils\process.h" />
+    <ClInclude Include="utils\user_literal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
