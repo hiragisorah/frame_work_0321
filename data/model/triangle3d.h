@@ -7,7 +7,7 @@
 #include <data\model.h>
 
 // シェーダ
-#include <data\shader\triangle3d.h>
+#include <data\shader\default3d.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -19,13 +19,21 @@ namespace Data
 		class Triangle3d : public IModel
 		{
 		public:
-			Shader::Triangle3d * shader_;
-			Shader::Triangle3d::CBUFFER cb_;
+			Shader::Default3d * shader_;
+			Shader::Default3d::CBUFFER cb_;
 
 		public:
 			Triangle3d(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Triangle3d>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default3d>();
+
+				std::vector<Shader::Default3d::Vertex> vertices;
+
+				vertices.emplace_back(D3DXVECTOR3(-.5f, -.5f, .0f));
+				vertices.emplace_back(D3DXVECTOR3(0.0f, +.5f, .0f));
+				vertices.emplace_back(D3DXVECTOR3(+.5f, -.5f, .0f));
+
+				Game::GetSystem<System::Direct3D11>()->CreateVertexBuffer(this, &vertices);
 			}
 
 		private:
@@ -42,15 +50,11 @@ namespace Data
 				this->shader_->Setup();
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
 
-				//バーテックスバッファーをセット
-				UINT stride = sizeof(Shader::Triangle3d::Vertex);
-				UINT offset = 0;
-
-				d3d->context_->IASetVertexBuffers(0, 1, &this->shader_->vertex_buffer_, &stride, &offset);
+				d3d->context_->IASetVertexBuffers(0, 1, &this->vertex_buffer_, &this->stride_, &this->offset_);
 				//プリミティブ・トポロジーをセット
 				d3d->context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 				//プリミティブをレンダリング
-				d3d->context_->Draw(3, 0);
+				d3d->context_->Draw(this->vtx_num_, 0);
 			}
 		};
 	}

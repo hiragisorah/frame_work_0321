@@ -35,9 +35,9 @@ namespace GameObject
 
 		void Always(void) override
 		{
-			auto d2d = Game::GetSystem<System::Direct3D11>();
+			auto d3d = Game::GetSystem<System::Direct3D11>();
 
-			d2d->AddToDrawList(&model);
+			d3d->AddToDrawList(&model);
 		}
 	};
 }

@@ -125,14 +125,8 @@
     <ClInclude Include="data\model\triangle2d.h" />
     <ClInclude Include="data\model\triangle3d.h" />
     <ClInclude Include="data\shader.h" />
-    <ClInclude Include="data\shader\line2d.h" />
-    <ClInclude Include="data\shader\line3d.h" />
-    <ClInclude Include="data\shader\point2d.h" />
-    <ClInclude Include="data\shader\point3d.h" />
-    <ClInclude Include="data\shader\square2d.h" />
-    <ClInclude Include="data\shader\square3d.h" />
-    <ClInclude Include="data\shader\triangle2d.h" />
-    <ClInclude Include="data\shader\triangle3d.h" />
+    <ClInclude Include="data\shader\default2d.h" />
+    <ClInclude Include="data\shader\default3d.h" />
     <ClInclude Include="data\texture.h" />
     <ClInclude Include="framework\component.h" />
     <ClInclude Include="framework\entity.h" />

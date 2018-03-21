@@ -153,9 +153,54 @@ namespace System
 			}
 		}
 
+	public:
 		void AddToDrawList(Data::IModel * model)
 		{
 			this->draw_list_.emplace_back(model);
+		}
+
+	public:
+		template<class _Type>
+		void CreateVertexBuffer(Data::IModel * model, std::vector<_Type> * vertices)
+		{
+			auto d3d = Game::GetSystem<System::Direct3D11>();
+
+			model->vtx_num_ = vertices->size();
+			model->stride_ = sizeof(_Type);
+			D3D11_BUFFER_DESC bd;
+			bd.Usage = D3D11_USAGE_DEFAULT;
+			bd.ByteWidth = model->stride_ * model->vtx_num_;
+			bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+			bd.CPUAccessFlags = 0;
+			bd.MiscFlags = 0;
+
+			D3D11_SUBRESOURCE_DATA init_data;
+			init_data.pSysMem = vertices->data();
+
+			if (FAILED(d3d->device_->CreateBuffer(&bd, &init_data, &model->vertex_buffer_)))
+				Utils::EndMsg("頂点バッファーの生成に失敗しました。");
+		}
+
+	public:
+		template<class _Type>
+		void CreateIndexBuffer(Data::IModel * model, std::vector<_Type> * indices)
+		{
+			auto d3d = Game::GetSystem<System::Direct3D11>();
+
+			model->index_num_ = indices->size();
+
+			D3D11_BUFFER_DESC bd;
+			bd.Usage = D3D11_USAGE_DEFAULT;
+			bd.ByteWidth = sizeof(_Type) * model->index_num_;
+			bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+			bd.CPUAccessFlags = 0;
+			bd.MiscFlags = 0;
+
+			D3D11_SUBRESOURCE_DATA init_data;
+			init_data.pSysMem = indices->data();
+
+			if (FAILED(d3d->device_->CreateBuffer(&bd, &init_data, &model->index_buffer_)))
+				Utils::EndMsg("インデックスバッファーの生成に失敗しました。");
 		}
 	};
 }
