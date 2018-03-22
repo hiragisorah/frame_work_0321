@@ -17,21 +17,14 @@ namespace Data
 		unsigned int offset_ = 0;
 		ID3D11Buffer * index_buffer_ = nullptr;
 		unsigned int index_num_ = 0;
-
-	public:
-		void Setup(void)
-		{
-			auto d3d = Game::GetSystem<System::Direct3D11>();
-			
-			d3d->context_->IASetVertexBuffers(0, 1, &this->vertex_buffer_, &this->stride_, &this->offset_);
-			d3d->context_->IASetIndexBuffer(this->index_buffer_, DXGI_FORMAT_R32_UINT, 0);
-		}
-
+		D3D11_PRIMITIVE_TOPOLOGY topology_ = D3D10_PRIMITIVE_TOPOLOGY_POINTLIST;
 
 	public:
 		template<class _Type>
-		void CreateVertexBuffer(std::vector<_Type> * vertices)
+		void CreateVertexBuffer(std::vector<_Type> * vertices, D3D11_PRIMITIVE_TOPOLOGY topology)
 		{
+			this->topology_ = topology;
+
 			auto d3d = Game::GetSystem<System::Direct3D11>();
 
 			this->vtx_num_ = vertices->size();

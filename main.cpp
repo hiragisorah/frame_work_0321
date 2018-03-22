@@ -12,6 +12,8 @@
 
 // ローダー
 #include <system\loader\shader.h>
+#include <system\loader\mesh.h>
+#include <system\loader\obj.h>
 
 // 標準ライブラリ
 #include <crtdbg.h>
@@ -34,19 +36,13 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 		Game::AddSystem<System::Camera>();
 		Game::AddSystem<System::Loader::Shader>();
 		Game::AddSystem<System::Loader::Mesh>();
+		Game::AddSystem<System::Loader::Obj>();
 	}
 
 	{// ロード
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default2d>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Default3d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Point2d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Point3d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Line2d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Line3d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Triangle2d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Triangle3d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square2d>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3d>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Common>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormal>();
+		Game::GetSystem<System::Loader::Obj>()->Load("hand");
 	}
 
 	{// 初期設定

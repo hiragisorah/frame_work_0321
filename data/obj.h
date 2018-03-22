@@ -1,0 +1,13 @@
+#pragma once
+
+// ÉfÅ[É^
+#include <data\mesh.h>
+
+namespace Data
+{
+	class IObj
+	{
+	public:
+		Data::IMesh mesh_;
+	};
+}

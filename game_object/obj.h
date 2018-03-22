@@ -7,37 +7,38 @@
 #include <system\direct3d11.h>
 
 // ƒ‚ƒfƒ‹
-#include <data\model\point3d.h>
+#include <data\model\obj.h>
 
 namespace GameObject
 {
-	class Point3d : public Entity
+	class Obj : public Entity
 	{
 	private:
-		Data::Model::Point3d model;
+		Data::Model::Obj model_;
 
 	public:
-		Point3d(Entity * parent) : Entity(parent)
+		Obj(Entity * parent) : Entity(parent)
 		{
-			
+			this->model_.Init("hand");
 		}
 
 	private:
 		void Update(void) override
 		{
-			D3DXMATRIX World;
+			D3DXMATRIX World, scale;
 			static float x = 0;
 			x += 0.01f;
-			D3DXMatrixTranslation(&World, x, 0.f, 0.f);
+			D3DXMatrixScaling(&scale, .3f, .3f, .3f);
+			D3DXMatrixRotationY(&World, x);
 
-			this->model.cb_.w_ = World;
+			this->model_.cb_.w_ = scale * World;
 		}
 
 		void Always(void) override
 		{
 			auto d3d = Game::GetSystem<System::Direct3D11>();
 
-			d3d->AddToDrawList(&model);
+			d3d->AddToDrawList(&this->model_);
 		}
 	};
 }

@@ -22,7 +22,7 @@ namespace Data
 				vertices.emplace_back(D3DXVECTOR3(+100.f, +100.f, .0f));
 				vertices.emplace_back(D3DXVECTOR3(-100.f, +100.f, .0f));
 
-				this->CreateVertexBuffer(&vertices);
+				this->CreateVertexBuffer(&vertices, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 			}
 		};
 	}

@@ -2,15 +2,13 @@
 
 // システム
 #include <system\direct3d11.h>
+#include <system\camera.h>
 
 // データ
 #include <data\model.h>
 
-// メッシュ
-#include <data\mesh\point2d.h>
-
 // シェーダ
-#include <data\shader\default2d.h>
+#include <data\shader\default3d.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -20,27 +18,29 @@ namespace Data
 {
 	namespace Model
 	{
-		class Point2d : public IModel
+		template<class _Mesh>
+		class Primitive3D : public IModel
 		{
 		public:
-			Mesh::Point2d * mesh_;
-			Shader::Default2d * shader_;
-			Shader::Default2d::CBUFFER cb_;
+			IMesh * mesh_ = nullptr;
+			Shader::Default3d * shader_;
+			Shader::Default3d::CBUFFER cb_;
 
 		public:
-			Point2d(void)
+			Primitive3D(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default2d>();
-				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<Mesh::Point2d>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default3d>();
+				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<_Mesh>();
 			}
 
 		private:
 			void Rendering(void) override
 			{
 				auto d3d = Game::GetSystem<System::Direct3D11>();
-				auto window = Game::GetSystem<System::Window>();
+				auto camera = Game::GetSystem<System::Camera>();
 
-				this->cb_.viewport_ = { window->Width<float>(), window->Height<float>() };
+				this->cb_.v_ = camera->GetView();
+				this->cb_.p_ = camera->GetProjection();
 
 				this->cb_.color_ = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 
@@ -49,7 +49,7 @@ namespace Data
 
 				d3d->context_->IASetVertexBuffers(0, 1, &this->mesh_->vertex_buffer_, &this->mesh_->stride_, &this->mesh_->offset_);
 				//プリミティブ・トポロジーをセット
-				d3d->context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+				d3d->context_->IASetPrimitiveTopology(this->mesh_->topology_);
 				//プリミティブをレンダリング
 				d3d->context_->Draw(this->mesh_->vtx_num_, 0);
 			}
