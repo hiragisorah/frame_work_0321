@@ -37,12 +37,13 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 		Game::AddSystem<System::Loader::Shader>();
 		Game::AddSystem<System::Loader::Mesh>();
 		Game::AddSystem<System::Loader::Obj>();
+		Game::AddSystem<System::Loader::Texture>();
 	}
 
 	{// ƒ[ƒh
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Common>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormal>();
-		Game::GetSystem<System::Loader::Obj>()->Load("hand");
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Sprite>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dUv>();
+		Game::GetSystem<System::Loader::Texture>()->Load("test.png");
 	}
 
 	{// ‰Šúİ’è

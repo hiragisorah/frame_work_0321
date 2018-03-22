@@ -7,7 +7,7 @@ namespace Data
 {
 	namespace Shader
 	{
-		class Common : public IShader
+		class Specular : public IShader
 		{
 		public:
 			struct Vertex
@@ -20,17 +20,19 @@ namespace Data
 			struct CBUFFER
 			{
 				D3DXMATRIX w_;
-				D3DXMATRIX wvp_;
+				D3DXMATRIX v_;
+				D3DXMATRIX p_;
 
 				D3DXVECTOR4 light_dir_;
 				D3DXCOLOR diffuse_;
+				D3DXVECTOR4 eye_;
 			};
 
 		public:
 			ID3D11Buffer * vertex_buffer_;
 
 		public:
-			Common(void)
+			Specular(void)
 			{
 				D3D11_INPUT_ELEMENT_DESC layout[] =
 				{
@@ -38,7 +40,7 @@ namespace Data
 					{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 				};
 				UINT num_elements = sizeof(layout) / sizeof(layout[0]);
-				this->Create("common", layout, num_elements);
+				this->Create("specular", layout, num_elements);
 				this->CreateConstantBuffer<CBUFFER>(0);
 			}
 		};

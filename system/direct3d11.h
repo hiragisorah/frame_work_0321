@@ -123,6 +123,17 @@ namespace System
 				}
 			}
 
+			{// ラスタライズ設定
+				D3D11_RASTERIZER_DESC rdc;
+				ZeroMemory(&rdc, sizeof(rdc));
+				rdc.CullMode = D3D11_CULL_NONE;
+				rdc.FillMode = D3D11_FILL_SOLID;
+				ID3D11RasterizerState* pIr = NULL;
+				this->device_->CreateRasterizerState(&rdc, &pIr);
+				this->context_->RSSetState(pIr);
+				Utils::Memory::SafeRelease(pIr);
+			}
+
 		}
 		~Direct3D11(void)
 		{

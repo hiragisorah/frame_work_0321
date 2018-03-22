@@ -8,7 +8,7 @@
 #include <data\model.h>
 
 // シェーダ
-#include <data\shader\common.h>
+#include <data\shader\specular.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -19,17 +19,17 @@ namespace Data
 	namespace Model
 	{
 		template<class _Mesh>
-		class CommonPrimitive3D : public IModel
+		class SpecularPrimitive : public IModel
 		{
 		public:
 			IMesh * mesh_;
-			Shader::Common * shader_;
-			Shader::Common::CBUFFER cb_;
+			Shader::Specular * shader_;
+			Shader::Specular::CBUFFER cb_;
 
 		public:
-			CommonPrimitive3D(void)
+			SpecularPrimitive(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Common>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Specular>();
 				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<_Mesh>();
 			}
 
@@ -39,16 +39,14 @@ namespace Data
 				auto d3d = Game::GetSystem<System::Direct3D11>();
 				auto camera = Game::GetSystem<System::Camera>();
 
-				D3DXMATRIX wvp;
-				
-				wvp = this->cb_.w_ * camera->GetView() * camera->GetProjection();
-				D3DXMatrixTranspose(&wvp, &wvp);
-				this->cb_.wvp_ = wvp;
-				
+				this->cb_.v_ = camera->GetView();
+				this->cb_.p_ = camera->GetProjection();
+
 				this->cb_.diffuse_ = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-				auto light = D3DXVECTOR3(0.f, 0.f, 1.f);
-				D3DXVec3Normalize(&light, &light);
-				this->cb_.light_dir_ = (D3DXVECTOR4)(light);
+
+				this->cb_.light_dir_ = { 0.f, 0.f, 1.f, 0.f };
+				this->cb_.eye_ = { camera->eye_, 0.f };
+
 				this->shader_->Setup();
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
 

@@ -8,9 +8,7 @@
 #include <system\camera.h>
 
 // ゲームオブジェクト
-#include <game_object\common_primitive.h>
-#include <game_object\primitive3d.h>
-#include <game_object\obj.h>
+#include <game_object\sprite.h>
 
 namespace Scene
 {
@@ -19,7 +17,7 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::CommonPrimitive3d>();
+			this->AddChild<GameObject::Sprite>();
 		}
 	};
 }

@@ -10,17 +10,17 @@
 #include <data\mesh\square3d_normal.h>
 
 // ƒ‚ƒfƒ‹
-#include <data\model\common_primitive3d.h>
+#include <data\model\shade_primitive.h>
 
 namespace GameObject
 {
-	class CommonPrimitive3d : public Entity
+	class ShadePrimitive : public Entity
 	{
 	private:
-		Data::Model::CommonPrimitive3D<Data::Mesh::Square3dNormal> model_;
+		Data::Model::ShadePrimitive<Data::Mesh::Square3dNormal> model_;
 
 	public:
-		CommonPrimitive3d(Entity * parent) : Entity(parent)
+		ShadePrimitive(Entity * parent) : Entity(parent)
 		{
 
 		}
@@ -32,7 +32,6 @@ namespace GameObject
 			static float x = 0;
 			x += 0.01f;
 			D3DXMatrixRotationY(&World, x);
-			D3DXMatrixTranspose(&World, &World);
 			this->model_.cb_.w_ = World;
 		}
 
