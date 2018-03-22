@@ -41,8 +41,12 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 	}
 
 	{// ÉçÅ[Éh
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Sprite>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dUv>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Shade>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Specular>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::ShadeSpecular>();
+		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::ShadeSpecularTex>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormal>();
+		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormalUv>();
 		Game::GetSystem<System::Loader::Texture>()->Load("test.png");
 	}
 

@@ -8,7 +8,7 @@
 #include <data\model.h>
 
 // シェーダ
-#include <data\shader\specular.h>
+#include <data\shader\shade_specular_tex.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -19,17 +19,18 @@ namespace Data
 	namespace Model
 	{
 		template<class _Mesh>
-		class SpecularPrimitive : public IModel
+		class ShadeSpecularTexPrimitive : public IModel
 		{
 		public:
 			IMesh * mesh_;
-			Shader::Specular * shader_;
-			Shader::Specular::CBUFFER cb_;
+			Shader::ShadeSpecularTex * shader_;
+			Shader::ShadeSpecularTex::CBUFFER cb_;
+			std::string textures_[10] = {};
 
 		public:
-			SpecularPrimitive(void)
+			ShadeSpecularTexPrimitive(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Specular>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::ShadeSpecularTex>();
 				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<_Mesh>();
 			}
 
@@ -42,13 +43,21 @@ namespace Data
 				this->cb_.v_ = camera->GetView();
 				this->cb_.p_ = camera->GetProjection();
 
-				this->cb_.diffuse_ = { 1.f, 0.f, 0.f, 1.f };
+				this->cb_.diffuse_ = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 
 				this->cb_.light_dir_ = { 0.f, .5f, -1.f, 0.f };
 				this->cb_.eye_ = { camera->eye_, 0.f };
 
 				this->shader_->Setup();
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
+
+				for (int n = 0; n < 10; n++)
+				{
+					if (this->textures_[n] != "")
+					{
+						this->shader_->SetTexture(n, this->textures_[n]);
+					}
+				}
 
 				d3d->context_->IASetVertexBuffers(0, 1, &this->mesh_->vertex_buffer_, &this->mesh_->stride_, &this->mesh_->offset_);
 				//プリミティブ・トポロジーをセット

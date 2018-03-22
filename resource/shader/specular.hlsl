@@ -6,7 +6,7 @@ cbuffer global
     matrix g_p;
 
     float4 g_vLightDir; //ライトの方向ベクトル
-    float4 g_Diffuse; //拡散反射(色）	
+	float4 g_Diffuse; //拡散反射(色）	
     float4 g_vEye; //カメラ（視点）
 };
 

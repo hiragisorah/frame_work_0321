@@ -8,7 +8,7 @@
 #include <data\model.h>
 
 // シェーダ
-#include <data\shader\specular.h>
+#include <data\shader\shade_specular.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -19,17 +19,17 @@ namespace Data
 	namespace Model
 	{
 		template<class _Mesh>
-		class SpecularPrimitive : public IModel
+		class ShadeSpecularPrimitive : public IModel
 		{
 		public:
 			IMesh * mesh_;
-			Shader::Specular * shader_;
-			Shader::Specular::CBUFFER cb_;
+			Shader::ShadeSpecular * shader_;
+			Shader::ShadeSpecular::CBUFFER cb_;
 
 		public:
-			SpecularPrimitive(void)
+			ShadeSpecularPrimitive(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Specular>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::ShadeSpecular>();
 				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<_Mesh>();
 			}
 
@@ -42,7 +42,7 @@ namespace Data
 				this->cb_.v_ = camera->GetView();
 				this->cb_.p_ = camera->GetProjection();
 
-				this->cb_.diffuse_ = { 1.f, 0.f, 0.f, 1.f };
+				this->cb_.diffuse_ = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
 
 				this->cb_.light_dir_ = { 0.f, .5f, -1.f, 0.f };
 				this->cb_.eye_ = { camera->eye_, 0.f };

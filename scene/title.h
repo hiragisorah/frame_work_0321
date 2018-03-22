@@ -8,7 +8,10 @@
 #include <system\camera.h>
 
 // ゲームオブジェクト
-#include <game_object\sprite.h>
+#include <game_object\shade_specular_tex_primitive.h>
+#include <game_object\specular_primitive.h>
+#include <game_object\shade_primitive.h>
+#include <game_object\shade_specular_primitive.h>
 
 namespace Scene
 {
@@ -17,7 +20,10 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::Sprite>();
+			this->AddChild<GameObject::ShadeSpecularTexPrimitive>();
+			//this->AddChild<GameObject::ShadeSpecularPrimitive>();
+			//this->AddChild<GameObject::ShadePrimitive>();
+			//this->AddChild<GameObject::SpecularPrimitive>();
 		}
 	};
 }

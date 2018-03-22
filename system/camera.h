@@ -11,12 +11,12 @@ namespace System
 	class Camera : public ISystem
 	{
 	public:
-		D3DXVECTOR3 eye_ = { 0.f, 0.f, -4.f };
+		D3DXVECTOR3 eye_ = { 0.f, 1.f, -2.f };
 		D3DXVECTOR3 at_ = { 0.f, 0.f, 0.f };
 		D3DXVECTOR3 up_ = { 0.f, 1.f, 0.f };
 
 	public:
-		float fov_ = 3.141592f / 4;
+		float fov_ = 3.1415926535f / 4;
 		float aspect_ = 16.f / 9.f;
 		float near_ = 0.1f;
 		float far_ = 100.f;
