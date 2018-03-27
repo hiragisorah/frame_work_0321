@@ -14,6 +14,7 @@
 #include <system\loader\shader.h>
 #include <system\loader\mesh.h>
 #include <system\loader\obj.h>
+#include <system\loader\fbx.h>
 
 // 標準ライブラリ
 #include <crtdbg.h>
@@ -38,16 +39,11 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 		Game::AddSystem<System::Loader::Mesh>();
 		Game::AddSystem<System::Loader::Obj>();
 		Game::AddSystem<System::Loader::Texture>();
+		Game::AddSystem<System::Loader::Fbx>();
 	}
 
 	{// ロード
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Shade>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Specular>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::ShadeSpecular>();
-		Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::ShadeSpecularTex>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormal>();
-		Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Square3dNormalUv>();
-		Game::GetSystem<System::Loader::Texture>()->Load("test.png");
+		
 	}
 
 	{// 初期設定

@@ -27,6 +27,7 @@
 #pragma comment(lib,"d3dx10.lib")
 #pragma comment(lib,"d3dx11.lib")
 #pragma comment(lib,"d3dCompiler.lib")
+#pragma comment(lib, "dxguid.lib")
 
 namespace System
 {
@@ -126,7 +127,7 @@ namespace System
 			{// ラスタライズ設定
 				D3D11_RASTERIZER_DESC rdc;
 				ZeroMemory(&rdc, sizeof(rdc));
-				rdc.CullMode = D3D11_CULL_NONE;
+				rdc.CullMode = D3D11_CULL_BACK;
 				rdc.FillMode = D3D11_FILL_SOLID;
 				ID3D11RasterizerState* pIr = NULL;
 				this->device_->CreateRasterizerState(&rdc, &pIr);

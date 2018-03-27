@@ -8,34 +8,35 @@
 
 // メッシュ
 #include <data\mesh\line3d.h>
-#include <data\mesh\line2d.h>
+#include <data\mesh\cube.h>
 
 // モデル
 #include <data\model\primitive3d.h>
-#include <data\model\primitive2d.h>
+
+// コンポーネント
+#include <component\transform.h>
 
 namespace GameObject
 {
 	class Primitive3D : public Entity
 	{
 	private:
-		Data::Model::Primitive3D<Data::Mesh::Line3d> model_;
+		Data::Model::Primitive3D<Data::Mesh::Cube> model_;
+
+	public:
+		Component::Transform * transform_;
 
 	public:
 		Primitive3D(Entity * parent) : Entity(parent)
 		{
-
+			this->transform_ = this->AddComponent<Component::Transform>();
 		}
 
 	private:
 		void Update(void) override
 		{
-			D3DXMATRIX World;
-			static float x = 0;
-			x += 0.1f;
-			D3DXMatrixTranslation(&World, x, 0.f, 0.f);
-
-			this->model_.cb_.w_ = World;
+			this->transform_->rotation_.y += .7f;
+			this->model_.cb_.w_ = this->transform_->GetParentMatrix();
 		}
 
 		void Always(void) override

@@ -1,4 +1,5 @@
 Texture2D g_tex : register(t0);
+
 SamplerState g_sampler : register(s0);
 
 cbuffer global

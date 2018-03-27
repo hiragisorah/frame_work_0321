@@ -31,6 +31,7 @@ namespace Data
 		public:
 			Obj(void) {}
 
+		public:
 			void Init(std::string file_name)
 			{
 				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default3d>();

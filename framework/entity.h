@@ -29,6 +29,11 @@ public:
 		for (auto child : this->children_)
 			delete child;
 	}
+public:
+	Entity * const GetParent(void)
+	{
+		return this->parent_;
+	}
 
 public:
 	template<class _Component, class ... Args>

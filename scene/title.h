@@ -8,10 +8,8 @@
 #include <system\camera.h>
 
 // ゲームオブジェクト
-#include <game_object\shade_specular_tex_primitive.h>
-#include <game_object\specular_primitive.h>
-#include <game_object\shade_primitive.h>
-#include <game_object\shade_specular_primitive.h>
+#include <game_object\primitive3d.h>
+#include <game_object\bone.h>
 
 namespace Scene
 {
@@ -20,10 +18,13 @@ namespace Scene
 	public:
 		Title(Entity * parent) : Entity(parent)
 		{
-			this->AddChild<GameObject::ShadeSpecularTexPrimitive>();
-			//this->AddChild<GameObject::ShadeSpecularPrimitive>();
-			//this->AddChild<GameObject::ShadePrimitive>();
-			//this->AddChild<GameObject::SpecularPrimitive>();
+			Game::GetSystem<System::Loader::Shader>()->Load<Data::Shader::Specular>();
+			Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Cube>();
+			Game::GetSystem<System::Loader::Mesh>()->Load<Data::Mesh::Line3d>();
+			auto a = this->AddChild<GameObject::Primitive3D>();
+			auto b = this->AddChild<GameObject::Bone>();
+			a->transform_->position_.x = 0.f;
+			b->transform_->position_.x = 3.f;
 		}
 	};
 }

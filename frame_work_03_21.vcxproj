@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(DXSDK_DIR)Include;$(ProjectDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(ProjectDir);C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\lib\vs2015\x86\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,6 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="component\animation_manager.h" />
+    <ClInclude Include="component\test_animation.h" />
+    <ClInclude Include="component\transform.h" />
+    <ClInclude Include="data\fbx.h" />
+    <ClInclude Include="data\mesh\cube.h" />
     <ClInclude Include="data\mesh\square3d_normal.h" />
     <ClInclude Include="data\mesh\line2d.h" />
     <ClInclude Include="data\mesh\line3d.h" />
@@ -127,14 +132,17 @@
     <ClInclude Include="data\mesh\triangle2d.h" />
     <ClInclude Include="data\mesh\triangle3d.h" />
     <ClInclude Include="data\model.h" />
+    <ClInclude Include="data\model\fbx.h" />
     <ClInclude Include="data\model\shade_primitive.h" />
     <ClInclude Include="data\model\primitive2d.h" />
     <ClInclude Include="data\model\primitive3d.h" />
     <ClInclude Include="data\model\obj.h" />
+    <ClInclude Include="data\model\shade_specular_obj.h" />
     <ClInclude Include="data\model\shade_specular_primitive.h" />
     <ClInclude Include="data\model\shade_specular_tex_primitive.h" />
     <ClInclude Include="data\model\specular_primitive.h" />
     <ClInclude Include="data\model\sprite.h" />
+    <ClInclude Include="data\model\font.h" />
     <ClInclude Include="data\obj.h" />
     <ClInclude Include="data\shader.h" />
     <ClInclude Include="data\shader\shade.h" />
@@ -150,18 +158,23 @@
     <ClInclude Include="framework\entity.h" />
     <ClInclude Include="framework\game.h" />
     <ClInclude Include="framework\system.h" />
+    <ClInclude Include="game_object\bone.h" />
+    <ClInclude Include="game_object\fbx.h" />
     <ClInclude Include="game_object\shade_primitive.h" />
     <ClInclude Include="game_object\primitive3d.h" />
     <ClInclude Include="game_object\obj.h" />
+    <ClInclude Include="game_object\shade_specular_obj.h" />
     <ClInclude Include="game_object\shade_specular_primitive.h" />
     <ClInclude Include="game_object\shade_specular_tex_primitive.h" />
     <ClInclude Include="game_object\specular_primitive.h" />
     <ClInclude Include="game_object\sprite.h" />
+    <ClInclude Include="game_object\text.h" />
     <ClInclude Include="scene\title.h" />
     <ClInclude Include="system\camera.h" />
     <ClInclude Include="system\collision_manager.h" />
     <ClInclude Include="system\direct3d11.h" />
     <ClInclude Include="system\input\wm.h" />
+    <ClInclude Include="system\loader\fbx.h" />
     <ClInclude Include="system\loader\mesh.h" />
     <ClInclude Include="system\loader\obj.h" />
     <ClInclude Include="system\loader\shader.h" />
@@ -174,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

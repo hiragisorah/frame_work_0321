@@ -20,10 +20,10 @@ namespace System
 			std::unordered_map<std::string, Data::Texture*> database_ = {};
 
 		public:
-			void Load(std::string file_name)
+			void Load(std::string file_name, bool full_path = false)
 			{
 				delete this->database_[file_name];
-				this->database_[file_name] = new Data::Texture(file_name);
+				this->database_[file_name] = new Data::Texture(file_name, full_path);
 			}
 
 		public:

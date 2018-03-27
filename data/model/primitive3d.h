@@ -23,13 +23,13 @@ namespace Data
 		{
 		public:
 			IMesh * mesh_ = nullptr;
-			Shader::Default3d * shader_;
-			Shader::Default3d::CBUFFER cb_;
+			Shader::Specular * shader_;
+			Shader::Specular::CBUFFER cb_;
 
 		public:
 			Primitive3D(void)
 			{
-				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Default3d>();
+				this->shader_ = Game::GetSystem<System::Loader::Shader>()->Get<Shader::Specular>();
 				this->mesh_ = Game::GetSystem<System::Loader::Mesh>()->Get<_Mesh>();
 			}
 
@@ -41,17 +41,29 @@ namespace Data
 
 				this->cb_.v_ = camera->GetView();
 				this->cb_.p_ = camera->GetProjection();
-
-				this->cb_.color_ = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+				this->cb_.eye_ = { camera->eye_, 0.f };
+				this->cb_.light_dir_ = { 0.f, .1f, -.1f, 1.f };
+				this->cb_.diffuse_ = { .1f, .5f, .5f, 1.f };
 
 				this->shader_->Setup();
 				this->shader_->UpdateConstantBuffer(0, &this->cb_);
 
-				d3d->context_->IASetVertexBuffers(0, 1, &this->mesh_->vertex_buffer_, &this->mesh_->stride_, &this->mesh_->offset_);
 				//プリミティブ・トポロジーをセット
 				d3d->context_->IASetPrimitiveTopology(this->mesh_->topology_);
-				//プリミティブをレンダリング
-				d3d->context_->Draw(this->mesh_->vtx_num_, 0);
+
+				d3d->context_->IASetVertexBuffers(0, 1, &this->mesh_->vertex_buffer_, &this->mesh_->stride_, &this->mesh_->offset_);
+
+				if (this->mesh_->index_buffer_)
+				{
+					d3d->context_->IASetIndexBuffer(this->mesh_->index_buffer_, DXGI_FORMAT_R32_UINT, 0);
+					//プリミティブをレンダリング
+					d3d->context_->DrawIndexed(this->mesh_->index_num_, 0, 0);
+				}
+				else
+				{
+					//プリミティブをレンダリング
+					d3d->context_->Draw(this->mesh_->vtx_num_, 0);
+				}
 			}
 		};
 	}

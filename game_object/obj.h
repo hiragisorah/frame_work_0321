@@ -9,29 +9,29 @@
 // モデル
 #include <data\model\obj.h>
 
+// コンポーネント
+#include <component\transform.h>
+#include <component\test_animation.h>
+
 namespace GameObject
 {
 	class Obj : public Entity
 	{
 	private:
-		Data::Model::Obj model_;
+		Data::Model::Obj model_ = {};
 
 	public:
 		Obj(Entity * parent) : Entity(parent)
 		{
-			this->model_.Init("hand");
+			this->model_.Init("cube");
+			this->AddComponent<Component::Transform>();
+			this->AddComponent<Component::TestAnimation>();
 		}
 
 	private:
 		void Update(void) override
 		{
-			D3DXMATRIX World, scale;
-			static float x = 0;
-			x += 0.01f;
-			D3DXMatrixScaling(&scale, .3f, .3f, .3f);
-			D3DXMatrixRotationY(&World, x);
-
-			this->model_.cb_.w_ = scale * World;
+			this->model_.cb_.w_ = this->GetComponent<Component::Transform>()->GetParentMatrix();
 		}
 
 		void Always(void) override
