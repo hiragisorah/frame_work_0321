@@ -169,6 +169,7 @@
     <ClInclude Include="game_object\specular_primitive.h" />
     <ClInclude Include="game_object\sprite.h" />
     <ClInclude Include="game_object\text.h" />
+    <ClInclude Include="scene\animation_test.h" />
     <ClInclude Include="scene\title.h" />
     <ClInclude Include="system\camera.h" />
     <ClInclude Include="system\collision_manager.h" />

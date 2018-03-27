@@ -9,6 +9,7 @@
 
 // シーン
 #include <scene\title.h>
+#include <scene\animation_test.h>
 
 // ローダー
 #include <system\loader\shader.h>
@@ -47,7 +48,7 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, char*, int)
 	}
 
 	{// 初期設定
-		Game::GetSystem<System::SceneManager>()->ChangeScene<Scene::Title>();
+		Game::GetSystem<System::SceneManager>()->ChangeScene<Scene::AnimationTest>();
 	}
 
 	{// 起動
